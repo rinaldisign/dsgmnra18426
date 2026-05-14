@@ -1,456 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Our Memories</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
-  <style>
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
+      height: 140px;
     }
-
-    html{
-      scroll-behavior:smooth;
-    }
-
-    body{
-      overflow-x:hidden;
-      background:
-        radial-gradient(circle at top, rgba(255,192,203,0.08), transparent 40%),
-        linear-gradient(to bottom,#140b12,#1b1218,#090909);
-      color:white;
-      font-family:'Inter',sans-serif;
-    }
-
-    /* =========================
-       OPENING TRANSITION
-    ========================== */
-
-    .opening{
-      position:fixed;
-      inset:0;
-      z-index:9999;
-      background:
-        radial-gradient(circle at center, rgba(255,255,255,0.06), transparent 45%),
-        linear-gradient(to bottom,#120b11,#090909);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      flex-direction:column;
-      animation:openingFade 3.8s ease forwards;
-      overflow:hidden;
-    }
-
-    .opening::before{
-      content:'';
-      position:absolute;
-      width:700px;
-      height:700px;
-      background:rgba(255,192,203,0.12);
-      border-radius:50%;
-      filter:blur(120px);
-      animation:pulse 6s ease-in-out infinite;
-    }
-
-    .opening h1{
-      position:relative;
-      z-index:2;
-      font-family:'Cormorant Garamond',serif;
-      font-size:clamp(60px,10vw,130px);
-      font-weight:400;
-      opacity:0;
-      animation:titleReveal 2s ease forwards;
-      letter-spacing:2px;
-    }
-
-    .opening p{
-      position:relative;
-      z-index:2;
-      margin-top:20px;
-      letter-spacing:6px;
-      text-transform:uppercase;
-      font-size:12px;
-      color:rgba(255,255,255,0.6);
-      opacity:0;
-      animation:titleReveal 2s ease forwards 0.5s;
-    }
-
-    @keyframes titleReveal{
-      from{
-        opacity:0;
-        transform:translateY(40px);
-        filter:blur(12px);
-      }
-      to{
-        opacity:1;
-        transform:translateY(0);
-        filter:blur(0);
-      }
-    }
-
-    @keyframes openingFade{
-      0%,75%{
-        opacity:1;
-        visibility:visible;
-      }
-      100%{
-        opacity:0;
-        visibility:hidden;
-      }
-    }
-
-    @keyframes pulse{
-      0%,100%{
-        transform:scale(1);
-        opacity:0.25;
-      }
-      50%{
-        transform:scale(1.15);
-        opacity:0.45;
-      }
-    }
-
-    /* =========================
-       BACKGROUND LIGHTS
-    ========================== */
-
-    .bg-light{
-      position:fixed;
-      border-radius:50%;
-      filter:blur(120px);
-      pointer-events:none;
-      z-index:0;
-      opacity:0.18;
-      animation:floatLight 12s ease-in-out infinite;
-    }
-
-    .light1{
-      width:500px;
-      height:500px;
-      background:#ffb7d5;
-      top:-100px;
-      left:50%;
-      transform:translateX(-50%);
-    }
-
-    .light2{
-      width:400px;
-      height:400px;
-      background:#ffffff;
-      bottom:0;
-      left:-100px;
-      opacity:0.08;
-    }
-
-    .light3{
-      width:450px;
-      height:450px;
-      background:#ffd6e7;
-      right:-120px;
-      top:40%;
-    }
-
-    @keyframes floatLight{
-      0%,100%{
-        transform:translateY(0px);
-      }
-      50%{
-        transform:translateY(-40px);
-      }
-    }
-
-    /* =========================
-       HERO SECTION
-    ========================== */
-
-    .hero{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      flex-direction:column;
-      text-align:center;
-      padding:40px 20px;
-      position:relative;
-      z-index:2;
-    }
-
-    .hero small{
-      letter-spacing:10px;
-      text-transform:uppercase;
-      color:rgba(255,255,255,0.55);
-      margin-bottom:25px;
-    }
-
-    .hero h2{
-      font-family:'Cormorant Garamond',serif;
-      font-size:clamp(55px,9vw,120px);
-      font-weight:400;
-      line-height:0.95;
-      max-width:1100px;
-    }
-
-    .hero h2 span{
-      display:block;
-      color:#ffd9e7;
-      font-style:italic;
-    }
-
-    .hero p{
-      margin-top:35px;
-      max-width:700px;
-      color:rgba(255,255,255,0.7);
-      line-height:1.9;
-      font-size:15px;
-    }
-
-    .scroll{
-      margin-top:90px;
-      letter-spacing:8px;
-      font-size:11px;
-      color:rgba(255,255,255,0.35);
-      animation:scrollFloat 2s ease-in-out infinite;
-    }
-
-    @keyframes scrollFloat{
-      0%,100%{
-        transform:translateY(0px);
-      }
-      50%{
-        transform:translateY(-10px);
-      }
-    }
-
-    /* =========================
-       GALLERY
-    ========================== */
-
-    .gallery{
-      position:relative;
-      z-index:2;
-      column-count:5;
-      column-gap:18px;
-      padding:20px;
-      max-width:1800px;
-      margin:auto;
-    }
-
-    @media(max-width:1300px){
-      .gallery{
-        column-count:4;
-      }
-    }
-
-    @media(max-width:900px){
-      .gallery{
-        column-count:3;
-      }
-    }
-
-    @media(max-width:700px){
-      .gallery{
-        column-count:2;
-      }
-
-      .hero h2{
-        line-height:1;
-      }
-    }
-
-    .photo{
-      position:relative;
-      margin-bottom:18px;
-      break-inside:avoid;
-      border-radius:32px;
-      overflow:hidden;
-      padding:12px;
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(255,255,255,0.08);
-      backdrop-filter:blur(8px);
-      box-shadow:0 15px 45px rgba(0,0,0,0.45);
-      transform:rotate(var(--rotate));
-      animation:floating var(--duration) ease-in-out infinite;
-      animation-delay:var(--delay);
-      transition:
-        transform 0.8s ease,
-        box-shadow 0.8s ease;
-    }
-
-    .photo:hover{
-      transform:rotate(0deg) scale(1.03);
-      box-shadow:0 20px 70px rgba(255,192,203,0.22);
-    }
-
-    @keyframes floating{
-      0%,100%{
-        transform:
-          translateY(0px)
-          rotate(var(--rotate));
-      }
-
-      50%{
-        transform:
-          translateY(-12px)
-          rotate(calc(var(--rotate) + 1deg));
-      }
-    }
-
-    .photo img{
-      width:100%;
-      display:block;
-      border-radius:24px;
-      transition:transform 5s ease;
-    }
-
-    .photo:hover img{
-      transform:scale(1.08);
-    }
-
-    .photo::after{
-      content:'';
-      position:absolute;
-      inset:0;
-      border-radius:32px;
-      background:
-        linear-gradient(
-          to top,
-          rgba(0,0,0,0.28),
-          transparent
-        );
-      pointer-events:none;
-    }
-
-    .bottom-space{
-      height:150px;
-    }
-
   </style>
 </head>
 <body>
 
-  <!-- OPENING -->
-  <div class="opening">
-    <h1>Our Memories</h1>
-    <p>Every Moment Still Lives</p>
+  <div class="background-glow">
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <div class="glow three"></div>
   </div>
 
-  <!-- BACKGROUND LIGHT -->
-  <div class="bg-light light1"></div>
-  <div class="bg-light light2"></div>
-  <div class="bg-light light3"></div>
-
-  <!-- HERO -->
   <section class="hero">
+    <small>OUR MEMORIES</small>
 
-    <small>OUR STORY</small>
-
-    <h2>
+    <h1>
       Every photo holds
-      <span>a piece of our memory</span>
-    </h2>
+      <span>a piece of our story</span>
+    </h1>
 
     <p>
       A collection of moments, laughter, silence, warmth,
-      distance, and feelings that never really disappear.
-      Every scroll is another page from our story.
+      distance, memories, and feelings that never really disappear.
     </p>
 
-    <div class="scroll">SCROLL</div>
-
+    <div class="scroll-text">SCROLL</div>
   </section>
 
-  <!-- GALLERY -->
   <section class="gallery" id="gallery"></section>
 
-  <div class="bottom-space"></div>
+  <div class="footer-space"></div>
 
   <script>
-
     const gallery = document.getElementById('gallery');
 
-    // =========================
-    // TOTAL FOTO
-    // =========================
-
+    // GANTI JUMLAH FOTO DI SINI
     const totalPhotos = 150;
 
-    // =========================
-    // RANDOM ROTATION
-    // =========================
+    const rotations = [-7, -5, -3, 3, 5, 7];
 
-    const rotations = [
-      -7,
-      -5,
-      -3,
-      3,
-      5,
-      7
-    ];
+    for (let i = 1; i <= totalPhotos; i++) {
+      const card = document.createElement('div');
+      card.className = 'photo';
 
-    // =========================
-    // GENERATE PHOTOS
-    // =========================
+      const rotation = rotations[Math.floor(Math.random() * rotations.length)];
+      const duration = 6 + Math.random() * 6;
+      const delay = Math.random() * 4;
 
-    for(let i = 1; i <= totalPhotos; i++){
-
-      const photo = document.createElement('div');
-      photo.className = 'photo';
-
-      const rotation =
-        rotations[
-          Math.floor(
-            Math.random() * rotations.length
-          )
-        ];
-
-      const duration =
-        6 + Math.random() * 6;
-
-      const delay =
-        Math.random() * 4;
-
-      photo.style.setProperty(
-        '--rotate',
-        `${rotation}deg`
-      );
-
-      photo.style.setProperty(
-        '--duration',
-        `${duration}s`
-      );
-
-      photo.style.setProperty(
-        '--delay',
-        `${delay}s`
-      );
+      card.style.setProperty('--rotate', `${rotation}deg`);
+      card.style.setProperty('--duration', `${duration}s`);
+      card.style.setProperty('--delay', `${delay}s`);
 
       const img = document.createElement('img');
 
-      // =========================
-      // FOTO DARI FOLDER photos/
-      // =========================
-
+      // FOTO DIAMBIL DARI FOLDER photos/
       img.src = `photos/${i}.jpg`;
 
       img.loading = 'lazy';
-
       img.alt = `Memory ${i}`;
 
-      photo.appendChild(img);
-
-      gallery.appendChild(photo);
-
+      card.appendChild(img);
+      gallery.appendChild(card);
     }
-
   </script>
 
 </body>
