@@ -1,18 +1,83 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Redirecting...</title>
 
-    <meta http-equiv="refresh" content="0; url=https://drive.google.com/drive/folders/17Mx6dhdF91ZhMiNgYD9zlb4iu9uxue7N" />
-    <link rel="canonical" href="https://drive.google.com/drive/folders/17Mx6dhdF91ZhMiNgYD9zlb4iu9uxue7N" />
+    .photo:hover img {
+      transform: scale(1.08);
+    }
 
-    <script>
-        window.location.replace("https://drive.google.com/drive/folders/17Mx6dhdF91ZhMiNgYD9zlb4iu9uxue7N");
-    </script>
+    .photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.25), transparent);
+      pointer-events: none;
+      border-radius: 32px;
+    }
+
+    .footer-space {
+      height: 140px;
+    }
+  </style>
 </head>
 <body>
-    <p>Redirecting ke halaman tujuan...</p>
-    <p>Kalau tidak otomatis, klik 
-    <a href="https://drive.google.com/drive/folders/17Mx6dhdF91ZhMiNgYD9zlb4iu9uxue7N">di sini</a>.</p>
+
+  <div class="background-glow">
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <div class="glow three"></div>
+  </div>
+
+  <section class="hero">
+    <small>OUR MEMORIES</small>
+
+    <h1>
+      Every photo holds
+      <span>a piece of our story</span>
+    </h1>
+
+    <p>
+      A collection of moments, laughter, silence, warmth,
+      distance, memories, and feelings that never really disappear.
+    </p>
+
+    <div class="scroll-text">SCROLL</div>
+  </section>
+
+  <section class="gallery" id="gallery"></section>
+
+  <div class="footer-space"></div>
+
+  <script>
+    const gallery = document.getElementById('gallery');
+
+    // GANTI JUMLAH FOTO DI SINI
+    const totalPhotos = 150;
+
+    const rotations = [-7, -5, -3, 3, 5, 7];
+
+    for (let i = 1; i <= totalPhotos; i++) {
+      const card = document.createElement('div');
+      card.className = 'photo';
+
+      const rotation = rotations[Math.floor(Math.random() * rotations.length)];
+      const duration = 6 + Math.random() * 6;
+      const delay = Math.random() * 4;
+
+      card.style.setProperty('--rotate', `${rotation}deg`);
+      card.style.setProperty('--duration', `${duration}s`);
+      card.style.setProperty('--delay', `${delay}s`);
+
+      const img = document.createElement('img');
+
+      // FOTO DIAMBIL DARI FOLDER photos/
+      img.src = `photos/${i}.jpg`;
+
+      img.loading = 'lazy';
+      img.alt = `Memory ${i}`;
+
+      card.appendChild(img);
+      gallery.appendChild(card);
+    }
+  </script>
+
 </body>
 </html>
