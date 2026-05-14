@@ -1,68 +1,71 @@
 <!DOCTYPE html>
-      height: 140px;
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Memories</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-  </style>
-</head>
-<body>
 
-  <div class="background-glow">
-    <div class="glow one"></div>
-    <div class="glow two"></div>
-    <div class="glow three"></div>
-  </div>
-
-  <section class="hero">
-    <small>OUR MEMORIES</small>
-
-    <h1>
-      Every photo holds
-      <span>a piece of our story</span>
-    </h1>
-
-    <p>
-      A collection of moments, laughter, silence, warmth,
-      distance, memories, and feelings that never really disappear.
-    </p>
-
-    <div class="scroll-text">SCROLL</div>
-  </section>
-
-  <section class="gallery" id="gallery"></section>
-
-  <div class="footer-space"></div>
-
-  <script>
-    const gallery = document.getElementById('gallery');
-
-    // GANTI JUMLAH FOTO DI SINI
-    const totalPhotos = 150;
-
-    const rotations = [-7, -5, -3, 3, 5, 7];
-
-    for (let i = 1; i <= totalPhotos; i++) {
-      const card = document.createElement('div');
-      card.className = 'photo';
-
-      const rotation = rotations[Math.floor(Math.random() * rotations.length)];
-      const duration = 6 + Math.random() * 6;
-      const delay = Math.random() * 4;
-
-      card.style.setProperty('--rotate', `${rotation}deg`);
-      card.style.setProperty('--duration', `${duration}s`);
-      card.style.setProperty('--delay', `${delay}s`);
-
-      const img = document.createElement('img');
-
-      // FOTO DIAMBIL DARI FOLDER photos/
-      img.src = `photos/${i}.jpg`;
-
-      img.loading = 'lazy';
-      img.alt = `Memory ${i}`;
-
-      card.appendChild(img);
-      gallery.appendChild(card);
+    html {
+      scroll-behavior: smooth;
     }
-  </script>
 
-</body>
+    body {
+      background:
+        radial-gradient(circle at top, rgba(255, 192, 203, 0.08), transparent 40%),
+        linear-gradient(to bottom, #120b11, #1b1218, #090909);
+      color: white;
+      overflow-x: hidden;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .background-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .glow {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(120px);
+      opacity: 0.25;
+      animation: pulse 10s ease-in-out infinite;
+    }
+
+    .glow.one {
+      width: 500px;
+      height: 500px;
+      background: #ff7eb6;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .glow.two {
+      width: 400px;
+      height: 400px;
+      background: #ffd6e7;
+      bottom: 0;
+      right: -100px;
+    }
+
+    .glow.three {
+      width: 350px;
+      height: 350px;
+      background: #ffffff;
+      left: -120px;
+      top: 40%;
 </html>
