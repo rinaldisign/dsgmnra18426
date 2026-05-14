@@ -68,4 +68,423 @@
       background: #ffffff;
       left: -120px;
       top: 40%;
+      opacity: 0.08;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.18;
+      }
+      50% {
+        transform: scale(1.12);
+        opacity: 0.32;
+      }
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 2;
+      animation: opening 2.5s ease forwards;
+    }
+
+    @keyframes opening {
+      0% {
+        opacity: 0;
+        transform: scale(1.05);
+        filter: blur(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+      }
+    }
+
+    .hero small {
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(58px, 10vw, 120px);
+      line-height: 0.95;
+      font-weight: 400;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 span {
+      font-style: italic;
+      color: #ffd6e7;
+    }
+
+    .hero p {
+      max-width: 700px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.9;
+      font-size: 15px;
+    }
+
+    .scroll-text {
+      margin-top: 80px;
+      letter-spacing: 6px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      animation: floatText 2s ease-in-out infinite;
+    }
+
+    @keyframes floatText {
+      0%,100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .gallery {
+      position: relative;
+      z-index: 2;
+      column-count: 5;
+      column-gap: 18px;
+      padding: 20px;
+      max-width: 1800px;
+      margin: auto;
+    }
+
+    @media(max-width: 1300px) {
+      .gallery {
+        column-count: 4;
+      }
+    }
+
+    @media(max-width: 900px) {
+      .gallery {
+        column-count: 3;
+      }
+    }
+
+    @media(max-width: 700px) {
+      .gallery {
+        column-count: 2;
+      }
+
+      .hero h1 {
+        line-height: 1;
+      }
+    }
+
+    .photo {
+      position: relative;
+      margin-bottom: 18px;
+      break-inside: avoid;
+      border-radius: 32px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      padding: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      animation: floating var(--duration) ease-in-out infinite;
+      animation-delay: var(--delay);
+      transform: rotate(var(--rotate));
+      transition: transform 0.8s ease, box-shadow 0.8s ease;
+    }
+
+    .photo:hover {
+      transform: rotate(0deg) scale(1.03);
+      box-shadow: 0 20px 60px rgba(255, 192, 203, 0.18);
+    }
+
+    @keyframes floating {
+      0%,100% {
+        transform: translateY(0px) rotate(var(--rotate));
+      }
+
+      50% {
+        transform: translateY(-10px) rotate(calc(var(--rotate) + 1deg));
+      }
+    }
+
+    .photo img {
+      width: 100%;
+      display: block;
+      border-radius: 24px;
+      transition: transform 5s ease;
+    }
+
+    .photo:hover img {
+      transform: scale(1.08);
+    }
+
+    .photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.25), transparent);
+      pointer-events: none;
+      border-radius: 32px;
+    }
+
+    .footer-space {
+      height: 140px;
+    }
+
+    /* PASSWORD SCREEN */
+
+    .password-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at top, rgba(255, 192, 203, 0.08), transparent 40%),
+        linear-gradient(to bottom, #120b11, #090909);
+      backdrop-filter: blur(10px);
+      transition: 1s ease;
+    }
+
+    .password-screen.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .password-box {
+      width: min(92%, 420px);
+      padding: 40px;
+      border-radius: 36px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(14px);
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      animation: passwordAppear 1.5s ease;
+    }
+
+    @keyframes passwordAppear {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+        filter: blur(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+
+    .password-box h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .password-box p {
+      color: rgba(255,255,255,0.65);
+      line-height: 1.8;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+
+    .password-box input {
+      width: 100%;
+      height: 58px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.06);
+      color: white;
+      padding: 0 20px;
+      font-size: 16px;
+      outline: none;
+      margin-bottom: 18px;
+    }
+
+    .password-box input::placeholder {
+      color: rgba(255,255,255,0.35);
+    }
+
+    .password-box button {
+      width: 100%;
+      height: 58px;
+      border: none;
+      border-radius: 18px;
+      background: linear-gradient(to right, #ffb7d5, #ffd6e7);
+      color: #1b1218;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.4s ease;
+    }
+
+    .password-box button:hover {
+      transform: scale(1.02);
+    }
+
+    .error-text {
+      margin-top: 14px;
+      font-size: 13px;
+      color: #ffb7d5;
+      opacity: 0;
+      transition: 0.3s ease;
+    }
+
+    .error-text.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="password-screen" id="passwordScreen">
+
+    <div class="password-box">
+
+      <h2>Our Memories</h2>
+
+      <p>
+        Enter the password to open
+        our private collection of memories.
+      </p>
+
+      <input
+        type="password"
+        id="passwordInput"
+        placeholder="Enter password"
+      >
+
+      <button id="enterButton">
+        Open Memories
+      </button>
+
+      <div class="error-text" id="errorText">
+        Wrong password.
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="background-glow">
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <div class="glow three"></div>
+  </div>
+
+  <section class="hero">
+    <small>OUR MEMORIES</small>
+
+    <h1>
+      Every photo holds
+      <span>a piece of our story</span>
+    </h1>
+
+    <p>
+      A collection of moments, laughter, silence, warmth,
+      distance, memories, and feelings that never really disappear.
+    </p>
+
+    <div class="scroll-text">SCROLL</div>
+  </section>
+
+  <section class="gallery" id="gallery"></section>
+
+  <div class="footer-space"></div>
+
+  <script>
+    const gallery = document.getElementById('gallery');
+
+    // GANTI JUMLAH FOTO DI SINI
+    const totalPhotos = 150;
+
+    const rotations = [-7, -5, -3, 3, 5, 7];
+
+    for (let i = 1; i <= totalPhotos; i++) {
+      const card = document.createElement('div');
+      card.className = 'photo';
+
+      const rotation = rotations[Math.floor(Math.random() * rotations.length)];
+      const duration = 6 + Math.random() * 6;
+      const delay = Math.random() * 4;
+
+      card.style.setProperty('--rotate', `${rotation}deg`);
+      card.style.setProperty('--duration', `${duration}s`);
+      card.style.setProperty('--delay', `${delay}s`);
+
+      const img = document.createElement('img');
+
+      // FOTO DIAMBIL DARI FOLDER photos/
+      img.src = `photos/${i}.jpg`;
+
+      img.loading = 'lazy';
+      img.alt = `Memory ${i}`;
+
+      card.appendChild(img);
+      gallery.appendChild(card);
+    }
+
+    // PASSWORD SYSTEM
+
+    const correctPassword = '29032026';
+
+    const passwordScreen = document.getElementById('passwordScreen');
+    const passwordInput = document.getElementById('passwordInput');
+    const enterButton = document.getElementById('enterButton');
+    const errorText = document.getElementById('errorText');
+
+    function openMemories() {
+
+      const value = passwordInput.value;
+
+      if(value === correctPassword) {
+
+        passwordScreen.classList.add('hide');
+
+        document.body.style.overflowY = 'auto';
+
+      } else {
+
+        errorText.classList.add('show');
+
+        passwordInput.style.borderColor = '#ffb7d5';
+
+        passwordInput.animate([
+          { transform: 'translateX(-6px)' },
+          { transform: 'translateX(6px)' },
+          { transform: 'translateX(-6px)' },
+          { transform: 'translateX(0px)' }
+        ], {
+          duration: 300
+        });
+
+      }
+
+    }
+
+    enterButton.addEventListener('click', openMemories);
+
+    passwordInput.addEventListener('keydown', (e) => {
+
+      if(e.key === 'Enter') {
+        openMemories();
+      }
+
+    });
+  </script>
+
+</body>
 </html>
